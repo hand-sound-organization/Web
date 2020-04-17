@@ -102,7 +102,7 @@
       <updated>1587091795665</updated>
       <workItem from="1587091828604" duration="29000" />
       <workItem from="1587092325898" duration="4394000" />
-      <workItem from="1587098071798" duration="759000" />
+      <workItem from="1587098071798" duration="1526000" />
     </task>
     <servers />
   </component>
@@ -130,10 +130,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587097179455" />
-    <state x="270" y="55" key="SettingsEditor" timestamp="1587098234580">
+    <state x="270" y="55" key="SettingsEditor" timestamp="1587101082936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587098234580" />
+    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587101082936" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WebEnd$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1587094257764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
