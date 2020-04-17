@@ -6,3 +6,4 @@ web 掌音web端
 2. 数据库：SQLite
 3. 数据库控制插件：Flask-SQLAlchemy
 4. 页面模板框架：jinjia2
+
