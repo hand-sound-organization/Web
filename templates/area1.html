@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>掌音|成都市安全态势</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/adminlte.min.css') }}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="./start1.html.html" class="nav-link">主页</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="./start1.html" class="nav-link">目录</a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="搜索" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">2</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="{{ url_for('static',filename='dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  管理员-2
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">安全通知</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 3小时前</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="{{ url_for('static',filename='dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  管理员-3
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">安全预警</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4小时前</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">3条新通知</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 份新报告
+            <span class="float-right text-muted text-sm">两天前</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">查看所有通知</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="./start1.html" class="brand-link">
+      <img src="{{ url_for('static',filename='dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">掌音攻击感知平台</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="./changeInfo.html" class="d-block">管理员-1</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="./start1.html" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                成都市安全态势
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="./start1.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>成都市攻击热力图</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./start2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>成都市安全热点图</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="./attackLog.html" class="nav-link activate">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                攻击日志
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item has-treeview menu-open">
+            <a href="./area1.html" class="nav-link active">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                辖区安全
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">11</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./area1.html" class="nav-link   active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>武侯区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>锦江区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>青羊区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area4.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>金牛区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area5.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>成华区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area6.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>龙泉驿区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area7.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>温江区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area8.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>新都区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area9.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>青白江区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area10.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>双流区</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./area11.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>郫都区</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-header">个人管理</li>
+          <li class="nav-item">
+            <a href="./changeInfo.html" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                信息修改
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="advise.html" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                意见反馈
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">辖区安全</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="./start1.html">主页</a></li>
+              <li class="breadcrumb-item active">辖区安全——武侯区</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h5 class="m-0">成都市攻击热力图</h5>
+              </div>
+              <div class="card-body">
+                <div  style="width:100%;height: 600px;z-index: 1000000;">
+                  <div id="mapcontainer1" style="width: 100%;height: 100%"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">安全事故时间变化图-1</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+            <!-- DONUT CHART -->
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">安全事故种类图-1</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          <!-- /.col-md-6 -->
+
+
+          <div class="col-md-6">
+
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h5 class="m-0">武侯区攻击热力预测图</h5>
+              </div>
+              <div class="card-body">
+                <div  style="width:100%;height: 600px;z-index: 1000000;">
+                  <div id="mapcontainer2" style="width: 100%;height: 100%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LINE CHART -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">安全事故时间变化图-2</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- PIE CHART -->
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">安全事故种类图-2</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--        </div>-->
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      智慧社区
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2020 <a href="https://adminlte.io">掌音</a>——</strong>基于隐生物特征的智能安控门锁系统
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{{ url_for('static',filename='plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static',filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
+<script src="//webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1&plugin=AMap.DistrictSearch"></script>
+<script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
+
+
+
+<!-- ChartJS -->
+<script src="./plugins/chart.js/Chart.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="./dist/js/demo.js"></script>
+
+<script>
+  let map1 = new AMap.Map("mapcontainer1", {
+    resizeEnable: false,
+    center: [104.07, 30.67],
+    zoom: 13
+  });
+
+  let district1 = null;
+  let polygons1=[];
+  function drawBounds1() {
+    //加载行政区划插件
+    if(!district1){
+      //实例化DistrictSearch
+      let opts1 = {
+        subdistrict: 0,   //获取边界不需要返回下级行政区
+        extensions: 'all',  //返回行政区边界坐标组等具体信息
+        level: 'district'  //查询行政级别为 市
+      };
+      district1 = new AMap.DistrictSearch(opts1);
+    }
+    //行政区查询
+    district1.setLevel('district')
+    district1.search('武侯区', function(status1, result1) {
+      map1.remove(polygons1)//清除上次结果
+      polygons1 = [];
+      let bounds1 = result1.districtList[0].boundaries;
+      if (bounds1) {
+        for (let i = 0, l = bounds1.length; i < l; i++) {
+          //生成行政区划polygon
+          let polygon1 = new AMap.Polygon({
+            strokeWeight: 4,
+            path: bounds1[i],
+            fillOpacity: 0.4,
+            fillColor: 'rgba(128,240,255,0)',
+            strokeColor: '#0091ea'
+          });
+          polygons1.push(polygon1);
+        }
+      }
+      map1.add(polygons1)
+      map1.setFitView(polygons1);//视口自适应
+    });
+  }
+  drawBounds1();
+  if (!isSupportCanvas()) {
+    alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+  }
+
+  //详细的参数,可以查看heatmap.js的文档 http://www.patrick-wied.at/static/heatmapjs/docs.html
+  //参数说明如下:
+  /* visible 热力图是否显示,默认为true
+   * opacity 热力图的透明度,分别对应heatmap.js的minOpacity和maxOpacity
+   * radius 势力图的每个点的半径大小
+   * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+   *	{
+   .2:'rgb(0, 255, 255)',
+   .5:'rgb(0, 110, 255)',
+   .8:'rgb(100, 0, 255)'
+   }
+   其中 key 表示插值的位置, 0-1
+   value 为颜色值
+   */
+  let heatmap1;
+  map1.plugin(["AMap.Heatmap"], function () {
+    //初始化heatmap对象
+    heatmap1 = new AMap.Heatmap(map1, {
+      radius: 25, //给定半径
+      opacity: [0, 0.8]
+      /*,
+      gradient:{
+          0.5: 'blue',
+          0.65: 'rgb(117,211,248)',
+          0.7: 'rgb(0, 255, 0)',
+          0.9: '#ffea00',
+          1.0: 'red'
+      }
+       */
+    });
+    //设置数据集：该数据为北京部分“公园”数据
+    heatmap1.setDataSet({
+      data:heatmapData,
+      max: 100
+    });
+  });
+  function heatmapShow1() {
+    heatmap1.show();
+  }
+  heatmapShow1();
+  /*   数据样式：Json对象
+  var heatmapData = [{
+"lng": 116.191031,
+"lat": 39.988585,
+"count": 10
+   }]
+*/
+
+  //判断浏览区是否支持canvas
+  function isSupportCanvas() {
+    let elem = document.createElement('canvas');
+    return !!(elem.getContext && elem.getContext('2d'));
+  }
+</script>
+
+<script>
+  let map = new AMap.Map("mapcontainer2", {
+    resizeEnable: false,
+    center: [104.07, 30.67],
+    zoom: 13
+  });
+
+  let district = null;
+  let polygons=[];
+  function drawBounds() {
+    //加载行政区划插件
+    if(!district){
+      //实例化DistrictSearch
+      let opts = {
+        subdistrict: 0,   //获取边界不需要返回下级行政区
+        extensions: 'all',  //返回行政区边界坐标组等具体信息
+        level: 'district'  //查询行政级别为 市
+      };
+      district = new AMap.DistrictSearch(opts);
+    }
+    //行政区查询
+    district.setLevel('district')
+    district.search('武侯区', function(status, result) {
+      map.remove(polygons)//清除上次结果
+      polygons = [];
+      let bounds = result.districtList[0].boundaries;
+      if (bounds) {
+        for (let i = 0, l = bounds.length; i < l; i++) {
+          //生成行政区划polygon
+          let polygon = new AMap.Polygon({
+            strokeWeight: 2,
+            path: bounds[i],
+            fillOpacity: 0.4,
+            fillColor: 'rgba(128,240,255,0.44)',
+            strokeColor: '#0091ea'
+          });
+          polygons.push(polygon);
+        }
+      }
+      map.add(polygons)
+      map.setFitView(polygons);//视口自适应
+    });
+  }
+  drawBounds();
+  if (!isSupportCanvas()) {
+    alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+  }
+
+  //详细的参数,可以查看heatmap.js的文档 http://www.patrick-wied.at/static/heatmapjs/docs.html
+  //参数说明如下:
+  /* visible 热力图是否显示,默认为true
+   * opacity 热力图的透明度,分别对应heatmap.js的minOpacity和maxOpacity
+   * radius 势力图的每个点的半径大小
+   * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+   *	{
+   .2:'rgb(0, 255, 255)',
+   .5:'rgb(0, 110, 255)',
+   .8:'rgb(100, 0, 255)'
+   }
+   其中 key 表示插值的位置, 0-1
+   value 为颜色值
+   */
+  let heatmap;
+  map.plugin(["AMap.Heatmap"], function () {
+    //初始化heatmap对象
+    heatmap = new AMap.Heatmap(map, {
+      radius: 25, //给定半径
+      opacity: [0, 0.8]
+      /*,
+      gradient:{
+          0.5: 'blue',
+          0.65: 'rgb(117,211,248)',
+          0.7: 'rgb(0, 255, 0)',
+          0.9: '#ffea00',
+          1.0: 'red'
+      }
+       */
+    });
+    // 设置数据集：该数据为北京部分“公园”数据
+    //     heatmap.setDataSet({
+    //         data:heatmapData,
+    //         max: 100
+    //     });
+  });
+
+
+  /*   数据样式：Json对象
+var heatmapData = [{
+"lng": 116.191031,
+"lat": 39.988585,
+"count": 10
+}]
+*/
+  let i = 0;
+  function heatmapShow(){
+    for(let j=0;j<heatmapData.length;j++){
+      heatmapData[j]["lng"]+=0.001;
+      heatmapData[j]["lat"]+=0.001;
+    }
+    heatmap.setDataSet({
+      data:heatmapData,
+      max:100
+    });
+    heatmap.show();
+    i++;
+    if(i!==10){
+      setTimeout(heatmapShow,100);
+    }else{
+      i = 0;
+      setTimeout(heatmapShow,100);
+    }
+  }
+  function heatmapHide() {
+    heatmap.hide();
+  }
+
+
+
+  heatmapShow();
+  //判断浏览区是否支持canvas
+  function isSupportCanvas() {
+    let elem = document.createElement('canvas');
+    return !!(elem.getContext && elem.getContext('2d'));
+  }
+</script>
+
+<!-- page script -->
+<script>
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+
+    //--------------
+    //- AREA CHART -
+    //--------------
+
+    // Get context with jQuery - using jQuery's .get() method.
+    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+    var areaChartData = {
+      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label               : 'Digital Goods',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : [5, 6, 4, 2, 7,5, 5]
+        },
+        {
+          label               : 'Electronics',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [6, 9, 8, 5, 6, 5, 5]
+        },
+      ]
+    }
+
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
+
+    // This will get the first returned node in the jQuery collection.
+    var areaChart       = new Chart(areaChartCanvas, {
+      type: 'line',
+      data: areaChartData,
+      options: areaChartOptions
+    })
+
+    //-------------
+    //- LINE CHART -
+    //--------------
+    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+    var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
+    var lineChartData = jQuery.extend(true, {}, areaChartData)
+    lineChartData.datasets[0].fill = false;
+    lineChartData.datasets[1].fill = false;
+    lineChartOptions.datasetFill = false
+
+    var lineChart = new Chart(lineChartCanvas, {
+      type: 'line',
+      data: lineChartData,
+      options: lineChartOptions
+    })
+
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+    var donutData        = {
+      labels: [
+        '忘记关门',
+        '重放攻击',
+        '合成攻击',
+        '暴力开锁',
+      ],
+      datasets: [
+        {
+          data: [700,500,400,600],
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var donutChart = new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions
+    })
+
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = donutData;
+    var pieOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
+    })
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+
+    //---------------------
+    //- STACKED BAR CHART -
+    //---------------------
+    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+    var stackedBarChartData = jQuery.extend(true, {}, barChartData)
+
+    var stackedBarChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      scales: {
+        xAxes: [{
+          stacked: true,
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    }
+
+    var stackedBarChart = new Chart(stackedBarChartCanvas, {
+      type: 'bar',
+      data: stackedBarChartData,
+      options: stackedBarChartOptions
+    })
+  })
+</script>
+</body>
+</html>
