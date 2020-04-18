@@ -7,6 +7,7 @@ import base64
 
 @app.route('/')
 def login():
+    print('xxxxxxxxxxxxxxxxxxxx')
     return render_template("login.html")
 
 
