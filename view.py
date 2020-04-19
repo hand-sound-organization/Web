@@ -1,6 +1,7 @@
 from app import app, db
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify,redirect,url_for,session,flash
 from models import *
+import random
 import json
 import base64
 from datetime import datetime
@@ -10,9 +11,9 @@ from datetime import datetime
 def login():
     return render_template("login.html")
 
-# 热力图
-@app.route('/HeatMap_chengdu', methods=['POST'])
-def homepage():
+
+@app.route('/judgement',methods=['POST'])
+def judgement():
     # 用户登录判定
     username = request.form['username']
     password = request.form['password']
@@ -27,13 +28,28 @@ def homepage():
         username = '万斌朝硕'
 
     if not user:
-        return "User's name and password are not correct! Please try again."
+        flash("Name or Password of user are not correct! Please try again.")
+        return redirect(url_for('login'))
     else:
+        session['user_name'] = username
+        session['login_time'] = datetime.now()
+        return redirect(url_for('homepage',
+                                username=username
+                                ))
+
+# 热力图
+@app.route('/HeatMap_chengdu') # 多参数之间使用/分离
+def homepage():
     # 加载成都市各区安全状态数据
-        districtInfo = DistrictInfo.query.all()
+    districtInfo = DistrictInfo.query.all()
+    if session.get('user_name'):
         return render_template("start1.html",
-                               username=username,
-                               districtInfo = districtInfo)
+                               username=session.get('user_name'),
+                               districtInfo=districtInfo)
+    else:
+        flash('You have not logged in,please log in first!')
+        return redirect(url_for('login'))
+
 #热点图
 @app.route('/HeatMap_chengdu/HeatPointMap')
 def heatpoint():
