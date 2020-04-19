@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, request, jsonify,redirect,url_for,session,flash
+from flask import render_template, request, jsonify, redirect, url_for, session, flash
 from models import *
 import random
 import json
@@ -7,14 +7,15 @@ import base64
 from datetime import datetime
 
 
+# 用户登录
 @app.route('/')
 def login():
     return render_template("login.html")
 
 
-@app.route('/judgement',methods=['POST'])
+# 用户登录判定
+@app.route('/judgement', methods=['POST'])
 def judgement():
-    # 用户登录判定
     username = request.form['username']
     password = request.form['password']
     user = User.query.filter(User.username == username, User.password == password).all()
@@ -37,8 +38,9 @@ def judgement():
                                 username=username
                                 ))
 
-# 热力图
-@app.route('/HeatMap_chengdu') # 多参数之间使用/分离
+
+# 成都市热力图展示页面
+@app.route('/HeatMap_chengdu')
 def homepage():
     # 加载成都市各区安全状态数据
     districtInfo = DistrictInfo.query.all()
@@ -50,58 +52,87 @@ def homepage():
         flash('You have not logged in,please log in first!')
         return redirect(url_for('login'))
 
-#热点图
+
+# 热力图数据交互处理
+@app.route('/HeatMap_chengdu/data', methods=['POST'])
+def homepage_data():
+    pointdist = {"heatmapData": []}
+    points = CityHeatMap.query.all()
+    for point in points:
+        pointdist["heatmapData"].append(json.dumps({
+            "lng": point.lng - 12.4,
+            "lat": point.lat - 9.3,
+            "count": point.count
+        }))
+    heatmap_jsondata = json.dumps(pointdist)
+    return jsonify(heatmap_jsondata)
+
+
+# 热点图
 @app.route('/HeatMap_chengdu/HeatPointMap')
 def heatpoint():
-    return  render_template("start2.html")
+    return render_template("start2.html")
+
 
 @app.route('/HeatMap_chengdu/Advise')
 def advise():
-    return  render_template("advise.html")
+    return render_template("advise.html")
+
 
 @app.route('/HeatMap_chengdu/Attacklog')
 def attacklog():
-    return  render_template("attackLog.html")
+    return render_template("attackLog.html")
+
 
 @app.route('/HeatMap_chengdu/wuhou')
 def wuhou():
     return render_template("area1.html")
 
+
 @app.route('/HeatMap_chengdu/jinjiang')
 def jinjiang():
     return render_template("area2.html")
+
 
 @app.route('/HeatMap_chengdu/qinyang')
 def qinyang():
     return render_template("area3.html")
 
+
 @app.route('/HeatMap_chengdu/jinniu')
 def jinniu():
     return render_template("area4.html")
+
 
 @app.route('/HeatMap_chengdu/chenghua')
 def chenghua():
     return render_template("area5.html")
 
+
 @app.route('/HeatMap_chengdu/longquanyi')
 def longquanyi():
     return render_template("area6.html")
+
 
 @app.route('/HeatMap_chengdu/wenjiang')
 def wenjiang():
     return render_template("area7.html")
 
+
 @app.route('/HeatMap_chengdu/xindu')
 def xindu():
     return render_template("area8.html")
+
 
 @app.route('/HeatMap_chengdu/qinbaijiang')
 def qinbaijiang():
     return render_template("area9.html")
 
+
 @app.route('/HeatMap_chengdu/shuangliu')
 def shuangliu():
     return render_template("area10.html")
+
 
 @app.route('/HeatMap_chengdu/pidu')
 def pidu():
