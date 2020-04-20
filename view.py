@@ -53,7 +53,7 @@ def homepage():
         return redirect(url_for('login'))
 
 
-# 热力图数据交互处理
+# 热力图数据交互处理（获取热力图数据）
 @app.route('/HeatMap_chengdu/data', methods=['POST'])
 def homepage_data():
     pointdist = {"heatmapData": []}
