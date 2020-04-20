@@ -525,7 +525,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             timeout: 5000,
             //请求成功
             success : function(result) {
-                alert("成功拉取热力图数据")
                 //console.log(result);
                 data_get = JSON.parse(result);;
                 heatmapData = data_get["heatmapData"];

@@ -365,21 +365,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- page script -->
 <script>
+let attackData;
+  $(function () {
+      $.ajax({
+        async: false,
+      //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //请求地址
+        url : "/HeatMap_chengdu/Attacklog/data",
+        //数据，json字符串
+        data : {"text":"get heatmap data!"},
+        //拉取数据类型
+        dataType:"json",
+        //超时时间
+        timeout: 5000,
+        success: function (res) {
+        data_get = JSON.parse(res);
+        console.log(data_get);
+        attackData = data_get["attackLogData"];
+        for(let i=0;i<attackData.length;i++){
+            attackData[i] = {
+            "攻击ID": attackData[i].id,
+            "门锁ID": attackData[i].lock_id,
+            "攻击时间": attackData[i].attack_time,
+            "攻击地点（经度）": attackData[i].lat,
+            "攻击地点（纬度）": attackData[i].lng,
+            "是否防御成功": attackData[i].isSafe
+            };
+            console.log(attackData[i])
+        }
+        console.log(attackData);
+        },
+        error: function (e) {
+            alert("网络错误，错误代码"+e);
+        }
+        //请求成功
+
+      })
+  });
   $(function () {
     $("#jsGrid1").jsGrid({
-      height: "100%",
+      height: "800px",
       width: "100%",
 
       sorting: true,
       paging: true,
 
-      data: db.clients,
+      data: attackData,
 
       fields: [
         { name: "攻击ID", type: "text", width: 150 },
         { name: "门锁ID", type: "text", width: 150 },
         { name: "攻击时间", type: "text", width: 100 },
-        { name: "攻击地点（经纬度）", type: "text" , width: 100},
+        { name: "攻击地点（经度）", type: "text" , width: 100},
+        { name: "攻击地点（纬度）", type: "text" , width: 100},
         { name: "是否防御成功", type: "checkbox", title: "是否防御成功？" }
       ]
     });

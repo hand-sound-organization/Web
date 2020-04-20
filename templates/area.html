@@ -426,7 +426,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
 <script src="//webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1&plugin=AMap.DistrictSearch"></script>
-<script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
 
 
 
@@ -467,10 +466,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         for (let i = 0, l = bounds1.length; i < l; i++) {
           //生成行政区划polygon
           let polygon1 = new AMap.Polygon({
-            strokeWeight: 4,
+            strokeWeight: 2,
             path: bounds1[i],
             fillOpacity: 0.4,
-            fillColor: 'rgba(128,240,255,0)',
+            fillColor: 'rgba(128,240,255,0.44)',
             strokeColor: '#0091ea'
           });
           polygons1.push(polygon1);
@@ -484,54 +483,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   if (!isSupportCanvas()) {
     alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
   }
-
-  //详细的参数,可以查看heatmap.js的文档 http://www.patrick-wied.at/static/heatmapjs/docs.html
-  //参数说明如下:
-  /* visible 热力图是否显示,默认为true
-   * opacity 热力图的透明度,分别对应heatmap.js的minOpacity和maxOpacity
-   * radius 势力图的每个点的半径大小
-   * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
-   *	{
-   .2:'rgb(0, 255, 255)',
-   .5:'rgb(0, 110, 255)',
-   .8:'rgb(100, 0, 255)'
-   }
-   其中 key 表示插值的位置, 0-1
-   value 为颜色值
-   */
-  let heatmap1;
-  map1.plugin(["AMap.Heatmap"], function () {
-    //初始化heatmap对象
-    heatmap1 = new AMap.Heatmap(map1, {
-      radius: 25, //给定半径
-      opacity: [0, 0.8]
-      /*,
-      gradient:{
-          0.5: 'blue',
-          0.65: 'rgb(117,211,248)',
-          0.7: 'rgb(0, 255, 0)',
-          0.9: '#ffea00',
-          1.0: 'red'
-      }
-       */
-    });
-    //设置数据集：该数据为北京部分“公园”数据
-    heatmap1.setDataSet({
-      data:heatmapData,
-      max: 100
-    });
-  });
-  function heatmapShow1() {
-    heatmap1.show();
-  }
-  heatmapShow1();
-  /*   数据样式：Json对象
-  var heatmapData = [{
-"lng": 116.191031,
-"lat": 39.988585,
-"count": 10
-   }]
-*/
 
   //判断浏览区是否支持canvas
   function isSupportCanvas() {
@@ -588,77 +539,132 @@ scratch. This page gets rid of all links and provides the needed markup only.
     alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
   }
 
-  //详细的参数,可以查看heatmap.js的文档 http://www.patrick-wied.at/static/heatmapjs/docs.html
-  //参数说明如下:
-  /* visible 热力图是否显示,默认为true
-   * opacity 热力图的透明度,分别对应heatmap.js的minOpacity和maxOpacity
-   * radius 势力图的每个点的半径大小
-   * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
-   *	{
-   .2:'rgb(0, 255, 255)',
-   .5:'rgb(0, 110, 255)',
-   .8:'rgb(100, 0, 255)'
-   }
-   其中 key 表示插值的位置, 0-1
-   value 为颜色值
-   */
-  let heatmap;
-  map.plugin(["AMap.Heatmap"], function () {
-    //初始化heatmap对象
-    heatmap = new AMap.Heatmap(map, {
-      radius: 25, //给定半径
-      opacity: [0, 0.8]
-      /*,
-      gradient:{
-          0.5: 'blue',
-          0.65: 'rgb(117,211,248)',
-          0.7: 'rgb(0, 255, 0)',
-          0.9: '#ffea00',
-          1.0: 'red'
-      }
-       */
-    });
-    // 设置数据集：该数据为北京部分“公园”数据
-    //     heatmap.setDataSet({
-    //         data:heatmapData,
-    //         max: 100
-    //     });
-  });
+  let heatmapDataleft;
+    function getdataleft() {
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/HeatMap_chengdu/data",
+            //数据，json字符串
+            data : {"text":"get heatmap data!"},
+            //拉取数据类型
+            dataType:"json",
+            //超时时间
+            timeout: 5000,
+            //请求成功
+            success : function(result) {
+                //console.log(result);
+                data_get = JSON.parse(result);;
+                heatmapDataleft = data_get["heatmapData"];
+                for(let i=0;i<heatmapDataleft.length;i++){
+                    heatmapDataleft[i] = JSON.parse(heatmapDataleft[i]);
+                }
+                let heatmap1;
+                  map1.plugin(["AMap.Heatmap"], function () {
+                    //初始化heatmap对象
+                    heatmap1 = new AMap.Heatmap(map1, {
+                      radius: 25, //给定半径
+                      opacity: [0, 0.8]
+                    });
+                    //设置数据集：该数据为北京部分“公园”数据
+                    heatmap1.setDataSet({
+                      data:heatmapDataleft,
+                      max: 100
+                    });
+                    heatmap.show()
+                  });
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                alert("拉取数据失败，请检查您的网络");
+                console.log(e.status);
+                console.log(e.responseText);
+            },
+            complete: function () {
+                //getdata()
+            }
+        })
+    }
+    // 获取热力图数据并加载插件绘制热力图
+    getdataleft();
 
-
-  /*   数据样式：Json对象
-var heatmapData = [{
-"lng": 116.191031,
-"lat": 39.988585,
-"count": 10
-}]
-*/
   let i = 0;
-  function heatmapShow(){
-    for(let j=0;j<heatmapData.length;j++){
-      heatmapData[j]["lng"]+=0.001;
-      heatmapData[j]["lat"]+=0.001;
+  function heatmapShow(heatmap){
+    for(let j=0;j<heatmapDataright.length;j++){
+      heatmapDataright[j]["lng"]+=0.00001;
+      heatmapDataright[j]["lat"]+=0.00001;
     }
     heatmap.setDataSet({
-      data:heatmapData,
+      data:heatmapDataright,
       max:100
     });
     heatmap.show();
     i++;
     if(i!==10){
-      setTimeout(heatmapShow,100);
+      setTimeout(function (){heatmapShow(heatmap)},100);
     }else{
       i = 0;
-      setTimeout(heatmapShow,100);
+      setTimeout(function (){heatmapShow(heatmap)},100);
     }
   }
-  function heatmapHide() {
-    heatmap.hide();
+
+
+
+
+  let heatmapDataright;
+  function getdataright() {
+    $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //请求地址
+        url : "/HeatMap_chengdu/data",
+        //数据，json字符串
+        data : {"text":"get heatmap data!"},
+        //拉取数据类型
+        dataType:"json",
+        //超时时间
+        timeout: 5000,
+        //请求成功
+        success : function(result) {
+            //console.log(result);
+            data_get = JSON.parse(result);
+            heatmapDataright = data_get["heatmapData"];
+            for(let i=0;i<heatmapDataright.length;i++){
+                heatmapDataright[i] = JSON.parse(heatmapDataright[i]);
+            }
+              let heatmap;
+              map.plugin(["AMap.Heatmap"], function () {
+                  //初始化heatmap对象
+                  heatmap = new AMap.Heatmap(map, {
+                      radius: 25, //给定半径
+                      opacity: [0, 0.8]
+                  });
+                  heatmap.setDataSet({
+                  data:heatmapDataright,
+                  max:100
+                });
+                  //heatmap.show()
+                heatmapShow(heatmap);
+              });
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            alert("拉取数据失败，请检查您的网络");
+            console.log(e.status);
+            console.log(e.responseText);
+        },
+        complete: function () {
+            //getdata()
+        }
+    })
   }
+  getdataright();
 
-
-
-  heatmapShow();
   //判断浏览区是否支持canvas
   function isSupportCanvas() {
     let elem = document.createElement('canvas');
