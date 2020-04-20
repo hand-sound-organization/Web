@@ -31,5 +31,14 @@ class CityHeatMap(db.Model):
         return '<CityHeatMap (%r,%r)>' % (self.lng,self.lat)
 
 
+class AttackLog(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    lock_id = db.Column(db.Integer,nullable=False)
+    attack_time  = db.Column(db.DateTime)
+    lng = db.Column(db.Float)
+    lat = db.Column(db.Float)
+    isSafe = db.Column(db.BOOLEAN)
 
+    def __repr__(self):
+        return '<AttackLog (%r,%r)>' % (self.lng,self.lat)
 
