@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, request, jsonify,redirect,url_for,session,flash
+from flask import render_template, request, jsonify,redirect,url_for,session,flash,Flask
 from models import *
 import random
 import json
@@ -53,60 +53,179 @@ def homepage():
 #热点图
 @app.route('/HeatMap_chengdu/HeatPointMap')
 def heatpoint():
-    return  render_template("start2.html")
+    return  render_template("start2.html",
+                            username=session.get('user_name'))
 
 @app.route('/HeatMap_chengdu/Advise')
 def advise():
-    return  render_template("advise.html")
+    return  render_template("advise.html",
+                            username=session.get('user_name'))
 
 @app.route('/HeatMap_chengdu/Attacklog')
 def attacklog():
-    return  render_template("attackLog.html")
+    return  render_template("attackLog.html",
+                            username=session.get('user_name'))
+
+@app.route('/HeatMap_chengdu/changeInfo')
+def changeInfo():
+    return  render_template("changeInfo.html",
+                            username=session.get('user_name'))
 
 @app.route('/HeatMap_chengdu/wuhou')
 def wuhou():
-    return render_template("area1.html")
+    area = '武侯区'
+    areaList = [1,0,0,0,0,0,0,0,0,0,0]
+    areaEn = ['wuhou','jinjiang','qinyang','jinniu','chenghua','longquanyi','wenjiang','xindu','qinbaijiang','shuangliu','pidu']
+    areaCh = ['武侯区','锦江区','青羊区','金牛区','成华区','龙泉驿区','温江区','新都区','青白江区','双流区','郫都区']
+    return render_template("area.html",
+                            username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/jinjiang')
 def jinjiang():
-    return render_template("area2.html")
+    area = '锦江区'
+    areaList = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/qinyang')
 def qinyang():
-    return render_template("area3.html")
+    area = '青羊区'
+    areaList = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
+
 
 @app.route('/HeatMap_chengdu/jinniu')
 def jinniu():
-    return render_template("area4.html")
+    area = '金牛区'
+    areaList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/chenghua')
 def chenghua():
-    return render_template("area5.html")
+    area = '成华区'
+    areaList = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/longquanyi')
 def longquanyi():
-    return render_template("area6.html")
+    area = '龙泉驿区'
+    areaList = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/wenjiang')
 def wenjiang():
-    return render_template("area7.html")
+    area = '温江区'
+    areaList = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/xindu')
 def xindu():
-    return render_template("area8.html")
+    area = '新都区'
+    areaList = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/qinbaijiang')
 def qinbaijiang():
-    return render_template("area9.html")
+    area = '青白江区'
+    areaList = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/shuangliu')
 def shuangliu():
-    return render_template("area10.html")
+    area = '双流区'
+    areaList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 @app.route('/HeatMap_chengdu/pidu')
 def pidu():
-    return render_template("area11.html")
+    area = '郫都区'
+    areaList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    areaEn = ['wuhou', 'jinjiang', 'qinyang', 'jinniu', 'chenghua', 'longquanyi', 'wenjiang', 'xindu', 'qinbaijiang',
+              'shuangliu', 'pidu']
+    areaCh = ['武侯区', '锦江区', '青羊区', '金牛区', '成华区', '龙泉驿区', '温江区', '新都区', '青白江区', '双流区', '郫都区']
+    return render_template("area.html",
+                           username=session.get('user_name'),
+                           area=area,
+                           areaList=areaList,
+                           areaEn=areaEn,
+                           areaCh=areaCh)
 
 
 if __name__ == '__main__':
     app.run()
+

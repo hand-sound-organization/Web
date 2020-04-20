@@ -13,13 +13,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Font Awesome Icons -->
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='dist/css/adminlte.min.css') }}">
   <!-- summernote -->
-  <link rel="stylesheet" href="./plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -34,10 +34,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="HeatMap_chengdu" class="nav-link">主页</a>
+        <a href="{{ url_for('homepage') }}" class="nav-link">主页</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="HeatMap_chengdu" class="nav-link">目录</a>
+        <a href="{{ url_for('homepage') }}" class="nav-link">目录</a>
       </li>
     </ul>
 
@@ -65,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="{{ url_for('static',filename='dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   管理员-2
@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="{{ url_for('static',filename='dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   管理员-3
@@ -129,8 +129,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="HeatMap_chengdu" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="{{ url_for('homepage') }}" class="brand-link">
+      <img src="{{ url_for('static',filename='dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">掌音攻击感知平台</span>
     </a>
@@ -140,10 +140,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="./changeInfo.html" class="d-block">管理员-1</a>
+          <a href="{{ url_for('changeInfo') }}" class="d-block">{{username}}</a>
         </div>
       </div>
 
@@ -163,13 +163,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="HeatMap_chengdu" class="nav-link">
+                <a href="{{ url_for('homepage') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>成都市攻击热力图</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="HeatMap_chengdu/HeatPointMap" class="nav-link">
+                <a href="{{ url_for('homepage') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>成都市安全热点图</p>
                 </a>
@@ -177,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item">
-            <a href="./attackLog.html" class="nav-link">
+            <a href="{{ url_for('attacklog') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 攻击日志
@@ -186,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="./area1.html" class="nav-link">
+            <a href="{{ url_for('wuhou') }}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 辖区安全
@@ -196,67 +196,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./area1.html" class="nav-link">
+                <a href="{{ url_for('wuhou') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>武侯区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area2.html" class="nav-link">
+                <a href="{{ url_for('jinjiang') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>锦江区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area3.html" class="nav-link">
+                <a href="{{ url_for('qinyang') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>青羊区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area4.html" class="nav-link">
+                <a href="{{ url_for('jinniu') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>金牛区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area5.html" class="nav-link">
+                <a href="{{ url_for('chenghua') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>成华区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area6.html" class="nav-link">
+                <a href="{{ url_for('longquanyi') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>龙泉驿区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area7.html" class="nav-link">
+                <a href="{{ url_for('wenjiang') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>./start1</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area8.html" class="nav-link">
+                <a href="{{ url_for('xindu') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>新都区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area9.html" class="nav-link">
+                <a href="{{ url_for('qinbaijiang') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>青白江区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area10.html" class="nav-link">
+                <a href="{{ url_for('shuangliu') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>双流区</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./area11.html" class="nav-link">
+                <a href="{{ url_for('pidu') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>郫都区</p>
                 </a>
@@ -266,7 +266,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-header">个人管理</li>
           <li class="nav-item">
-            <a href="./changeInfo.html" class="nav-link">
+            <a href="{{ url_for('changeInfo') }}" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 信息修改
@@ -275,7 +275,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="./advise.html" class="nav-link  active">
+            <a href="{{ url_for('advise') }}" class="nav-link  active">
               <i class="nav-icon far fa-image"></i>
               <p>
                 意见反馈
@@ -300,7 +300,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="HeatMap_chengdu">主页</a></li>
+              <li class="breadcrumb-item"><a href="{{ url_for('homepage') }}">主页</a></li>
               <li class="breadcrumb-item active">个人管理</li>
             </ol>
           </div><!-- /.col -->
@@ -374,15 +374,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="./plugins/jquery/jquery.min.js"></script>
+
+<script src="{{ url_for('static',filename='plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static',filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="./dist/js/adminlte.min.js"></script>
+<script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="./dist/js/demo.js"></script>
+<script src="{{ url_for('static',filename='dist/js/demo.js') }}"></script>
 <!-- Summernote -->
-<script src="./plugins/summernote/summernote-bs4.min.js"></script>
+<script src="{{ url_for('static',filename='plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script>
   $(function () {
     // Summernote
