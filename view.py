@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, request, jsonify,redirect,url_for,session,flash,Flask
+from flask import render_template, request, jsonify, redirect, url_for, session, flash
 from models import *
 import random
 import json
@@ -7,14 +7,15 @@ import base64
 from datetime import datetime
 
 
+# 用户登录
 @app.route('/')
 def login():
     return render_template("login.html")
 
 
-@app.route('/judgement',methods=['POST'])
+# 用户登录判定
+@app.route('/judgement', methods=['POST'])
 def judgement():
-    # 用户登录判定
     username = request.form['username']
     password = request.form['password']
     user = User.query.filter(User.username == username, User.password == password).all()
@@ -37,8 +38,9 @@ def judgement():
                                 username=username
                                 ))
 
-# 热力图
-@app.route('/HeatMap_chengdu') # 多参数之间使用/分离
+
+# 成都市热力图展示页面
+@app.route('/HeatMap_chengdu')
 def homepage():
     # 加载成都市各区安全状态数据
     districtInfo = DistrictInfo.query.all()
@@ -50,11 +52,29 @@ def homepage():
         flash('You have not logged in,please log in first!')
         return redirect(url_for('login'))
 
-#热点图
+
+# 热力图数据交互处理（获取热力图数据）
+@app.route('/HeatMap_chengdu/data', methods=['POST'])
+def homepage_data():
+    pointdist = {"heatmapData": []}
+    points = CityHeatMap.query.all()
+    for point in points:
+        pointdist["heatmapData"].append(json.dumps({
+            "lng": point.lng - 12.4,
+            "lat": point.lat - 9.3,
+            "count": point.count
+        }))
+    heatmap_jsondata = json.dumps(pointdist)
+    return jsonify(heatmap_jsondata)
+
+
+# 热点图
 @app.route('/HeatMap_chengdu/HeatPointMap')
 def heatpoint():
+    districtInfo = DistrictInfo.query.all()
     return  render_template("start2.html",
-                            username=session.get('user_name'))
+                            username=session.get('user_name'),
+                            districtInfo=districtInfo)
 
 @app.route('/HeatMap_chengdu/Advise')
 def advise():
@@ -226,6 +246,6 @@ def pidu():
                            areaCh=areaCh)
 
 
+
 if __name__ == '__main__':
     app.run()
-

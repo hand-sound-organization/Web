@@ -13,8 +13,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="//webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1"></script>
   <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1&plugin=AMap.DistrictSearch"></script>
-  <script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
-
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ url_for('static',filename='plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
@@ -24,6 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <!--<body class="hold-transition sidebar-mini">-->
 <body>
+<!--<body class="hold-transition sidebar-mini">-->
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -446,7 +445,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ url_for('static',filename='dist/js/adminlte.min.js') }}"></script>
 <script src="//webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=4217c8330d42994f2fad60b0f37c20f1&plugin=AMap.DistrictSearch"></script>
-<script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
 <script>
   let map = new AMap.Map("mapcontainer", {
     resizeEnable: false,
@@ -491,36 +489,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   }
   drawBounds();
-  // document.getElementById('draw').onclick = drawBounds;
-  // document.getElementById('district').onkeydown = function(e) {
-  //     if (e.keyCode === 13) {
-  //         drawBounds();
-  //         return false;
-  //     }
-  //     return true;
-  // };
-
-  // district.search('朝阳区', function(status, result) {
-  //     // 获取朝阳区的边界信息
-  //     var bounds = result.districtList[0].boundaries
-  //     var polygons = []
-  //     if (bounds) {
-  //         for (var i = 0, l = bounds.length; i < l; i++) {
-  //             //生成行政区划polygon
-  //             var polygon = new AMap.Polygon({
-  //                 map: map,
-  //                 strokeWeight: 1,
-  //                 path: bounds[i],
-  //                 fillOpacity: 0.7,
-  //                 fillColor: '#CCF3FF',
-  //                 strokeColor: '#CC66CC'
-  //             })
-  //             polygons.push(polygon)
-  //         }
-  //         // 地图自适应
-  //         map.setFitView()
-  //     }
-  // })
 
   if (!isSupportCanvas()) {
     alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
@@ -540,38 +508,69 @@ scratch. This page gets rid of all links and provides the needed markup only.
    其中 key 表示插值的位置, 0-1
    value 为颜色值
    */
-  let heatmap;
-  map.plugin(["AMap.Heatmap"], function () {
-    //初始化heatmap对象
-    heatmap = new AMap.Heatmap(map, {
-      radius: 25, //给定半径
-      opacity: [0, 0.8]
-      /*,
-      gradient:{
-          0.5: 'blue',
-          0.65: 'rgb(117,211,248)',
-          0.7: 'rgb(0, 255, 0)',
-          0.9: '#ffea00',
-          1.0: 'red'
-      }
-       */
-    });
-    //设置数据集：该数据为北京部分“公园”数据
-    heatmap.setDataSet({
-      data:heatmapData,
-      max: 100
-    });
-  });
-
-  heatmap.show()
-  /*   数据样式：Json对象
-  var heatmapData = [{
-"lng": 116.191031,
-"lat": 39.988585,
-"count": 10
-   }]
-*/
-
+  let heatmapData;
+    function getdata() {
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/HeatMap_chengdu/data",
+            //数据，json字符串
+            data : {"text":"get heatmap data!"},
+            //拉取数据类型
+            dataType:"json",
+            //超时时间
+            timeout: 5000,
+            //请求成功
+            success : function(result) {
+                alert("成功拉取热力图数据")
+                //console.log(result);
+                data_get = JSON.parse(result);;
+                heatmapData = data_get["heatmapData"];
+                for(let i=0;i<heatmapData.length;i++){
+                    heatmapData[i] = JSON.parse(heatmapData[i]);
+                }
+                  let heatmap;
+                  map.plugin(["AMap.Heatmap"], function () {
+                    //初始化heatmap对象
+                    heatmap = new AMap.Heatmap(map, {
+                      radius: 25, //给定半径
+                      opacity: [0, 0.8]
+                      /*,
+                      gradient:{
+                          0.5: 'blue',
+                          0.65: 'rgb(117,211,248)',
+                          0.7: 'rgb(0, 255, 0)',
+                          0.9: '#ffea00',
+                          1.0: 'red'
+                      }
+                       */
+                    });
+                    //设置数据集：该数据为北京部分“公园”数据
+                      console.log(heatmapData)
+                    heatmap.setDataSet({
+                      data:heatmapData,
+                      max: 100
+                    });
+                      heatmap.show()
+                  });
+               // console.log(heatmapData);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                alert("拉取数据失败，请检查您的网络");
+                console.log(e.status);
+                console.log(e.responseText);
+            },
+            complete: function () {
+                //getdata()
+            }
+        })
+    }
+    // 获取热力图数据并加载插件绘制热力图
+    getdata()
   //判断浏览区是否支持canvas
   function isSupportCanvas() {
     let elem = document.createElement('canvas');
