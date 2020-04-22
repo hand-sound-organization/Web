@@ -346,6 +346,14 @@ def pidu():
         flash('You have not logged in,please log in first!')
         return redirect(url_for('login'))
 
+@app.route('/app/login',methods=['GET','POST'])
+def app_login():
+    # a = request.args.get('xxx')
+    # b = request.form['xxx']
+
+    return jsonify({
+        "isTrue":True
+    })
 
 if __name__ == '__main__':
     app.run()
