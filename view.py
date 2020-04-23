@@ -346,6 +346,7 @@ def pidu():
         flash('You have not logged in,please log in first!')
         return redirect(url_for('login'))
 
+
 @app.route('/app/login',methods=['GET','POST'])
 def app_login():
     # a = request.args.get('xxx')
@@ -353,12 +354,6 @@ def app_login():
 
     return jsonify({
         "isTrue":True
-    })
-
-@app.route('/app/login',methods=['GET','POST'])
-def app_login():
-    return jsonify({
-        "xxx":888888
     })
 
 
