@@ -371,5 +371,18 @@ def app_WarningInfo():
 
 
 if __name__ == '__main__':
-
+    # a1 = WarningInfo.query.get(1)
+    # db.session.delete(a1)
+    # db.session.commit()
+    # a1 = WarningInfo(name='用户1', event='开门', occur_time='2020-04-21 21:36')
+    # a2 = WarningInfo(name='攻击者', event='攻击', occur_time='2020-04-22 03:06')
+    # a3 = WarningInfo(name='用户1', event='开门', occur_time='2020-04-22 12:51')
+    # a4 = WarningInfo(name='陌生人', event='试错', occur_time='2020-04-22 13:23')
+    # a5 = WarningInfo(name='用户1', event='开门', occur_time='2020-04-22 18:16')
+    # db.session.add(a5)
+    # db.session.add(a4)
+    # db.session.add(a3)
+    # db.session.add(a2)
+    # db.session.add(a1)
+    # db.session.commit()
     app.run()

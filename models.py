@@ -48,7 +48,7 @@ class WarningInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     event = db.Column(db.String)
     name = db.Column(db.String)
-    occur_time = db.Column(db.DateTime)
+    occur_time = db.Column(db.String)
 
     def __repr__(self):
         return '<WarningInfo>' % (self.event, self.name)
