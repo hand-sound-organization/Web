@@ -347,5 +347,12 @@ def pidu():
         return redirect(url_for('login'))
 
 
+@app.route('/app/login',methods=['GET','POST'])
+def app_login():
+    return jsonify({
+        "xxx":888888
+    })
+
+
 if __name__ == '__main__':
     app.run()

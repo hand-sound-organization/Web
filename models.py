@@ -42,3 +42,14 @@ class AttackLog(db.Model):
     def __repr__(self):
         return '<AttackLog (%r,%r)>' % (self.lng,self.lat)
 
+
+class WarningInfo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event = db.Column(db.String)
+    name = db.Column(db.String)
+    occur_time = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return '<WarningInfo %r %r>' % (self.event, self.name)
+
+
