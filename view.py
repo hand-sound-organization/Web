@@ -4,7 +4,7 @@ from models import *
 import random
 import json
 import base64
-from datetime import datetime
+from datetime import datetime, time
 
 
 # 用户登录
@@ -346,6 +346,7 @@ def pidu():
         flash('You have not logged in,please log in first!')
         return redirect(url_for('login'))
 
+
 @app.route('/app/login',methods=['GET','POST'])
 def app_login():
     # a = request.args.get('xxx')
@@ -355,5 +356,20 @@ def app_login():
         "isTrue":True
     })
 
+
+@app.route('/app/WarningInfo',methods=['GET','POST'])
+def app_WarningInfo():
+    queryInfo = WarningInfo.query.all()
+    column_list = []
+    for item in queryInfo:
+        column_dict = {}
+        column_dict['name'] = item.name
+        column_dict['event'] = item.event
+        column_dict['occur_time'] = item.occur_time
+        column_list.append(column_dict)
+    return jsonify({"returnInfo": column_list})
+
+
 if __name__ == '__main__':
+
     app.run()
