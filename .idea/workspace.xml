@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1b5bf356-a5c3-4a8a-a926-6759cdc16536" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/view.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +254,7 @@
       <workItem from="1587301043255" duration="1846000" />
       <workItem from="1587351918298" duration="13910000" />
       <workItem from="1587394244034" duration="626000" />
-      <workItem from="1587537201283" duration="30970000" />
+      <workItem from="1587537201283" duration="32574000" />
     </task>
     <task id="LOCAL-00001" summary="添加了用户登录模块，用户名为名字拼音全拼，密码为全拼+123">
       <created>1587179389924</created>
@@ -329,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587647824114</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="更新了开门信息数据库WarningInfo">
+      <created>1587655062730</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1587655062730</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +361,8 @@
     <MESSAGE value="将热力图数据写入数据库，并可以实现热力图异步动态更新。&#10;添加了热力图数据表csv，Json格式的text。" />
     <MESSAGE value="完成了页面交互" />
     <MESSAGE value="添加了开门信息数据库WarningInfo&#10;添加返回页面/app/WarningInfo，页面内容为开门信息json数据" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了开门信息数据库WarningInfo&#10;添加返回页面/app/WarningInfo，页面内容为开门信息json数据" />
+    <MESSAGE value="更新了开门信息数据库WarningInfo" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新了开门信息数据库WarningInfo" />
   </component>
   <component name="WindowStateProjectService">
     <state x="497" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587112676394">
