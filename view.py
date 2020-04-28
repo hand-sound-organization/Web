@@ -384,25 +384,31 @@ def app_WarningInfo():
     else:
         newWarning = WarningInfo(name=request.form['name'],
                                  event=request.form['event'],
-                                 occur_time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"))
+                                 occur_time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"))
         db.session.add(newWarning)
-        appuser = APPUser.query.filter(APPUser.username == request.form['app_username'],APPUser.lock_id == int(request.form['lock_id'])).first()
-        newAttackLog = AttackLog(lock_id=int(request.form['lock_id']),
-                                 attack_time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"),
-                                 lng=appuser.lng,
-                                 lat=appuser.lat,
-                                 isSafe=request.form['isSafe'] == 'True')
-        db.session.add(newAttackLog)
-        newCityHeatMap = CityHeatMap(lng=appuser.lng,
-                                     lat=appuser.lat,
-                                     count=50,
-                                     time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"))
-        db.session.add(newCityHeatMap)
-        db.session.commit()
-        db.session.close()
+        if request.form['event'] == '攻击':
+            appuser = APPUser.query.filter(APPUser.username == request.form['app_username'],
+                                           APPUser.lock_id == int(request.form['lock_id'])).first()
+            newAttackLog = AttackLog(lock_id=int(request.form['lock_id']),
+                                     attack_time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"),
+                                     lng=round(appuser.lng, 2),
+                                     lat=round(appuser.lat, 2),
+                                     isSafe=request.form['isSafe'] == 'True')
+            db.session.add(newAttackLog)
+            newCityHeatMap = CityHeatMap(lng=appuser.lng,
+                                         lat=appuser.lat,
+                                         count=50,
+                                         time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"))
+            db.session.add(newCityHeatMap)
+            db.session.commit()
+            db.session.close()
+        return "Message is sent Successfully !"
 
 
 if __name__ == '__main__':
+    # appuser = APPUser(username='lsd',lock_id=2020,lng=116.591031 - 12.4,lat=39.540089 - 9.3)
+    # db.session.add(appuser)
+    # db.session.commit()
     # a1 = WarningInfo.query.get(1)
     # db.session.delete(a1)
     # db.session.commit()
