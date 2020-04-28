@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ url_for('static',filename='dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ url_for('static',filename='dist/img/user3-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{ url_for('changeInfo') }}" class="d-block">{{username}}</a>
@@ -454,8 +454,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
     center: [104.07, 30.67],
     zoom: 8
   });
+  let markers;
+  $(function () {
+      $.ajax({
+          //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/HeatMap_chengdu/HeatPointMap/data",
+            //数据，json字符串
+            data : {"text":"get heatmap data!"},
+            //拉取数据类型
+            dataType:"json",
+            //超时时间
+            timeout: 5000,
+            //请求成功
+            success : function(result) {
+                //console.log(result);
+                data_get = JSON.parse(result);
+                markers = data_get["point"];
+                for(let i=0;i<markers.length;i++){
+                    markers[i] = JSON.parse(markers[i]);
+                }
+                markers.forEach(function(marker) {
+                new AMap.Marker({
+                  map: map,
+                  icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png',
+                  position: [marker.position[0], marker.position[1]],
+                  offset: new AMap.Pixel(-13, -30)
+                });
+              });
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                alert("拉取数据失败，请检查您的网络");
+                console.log(e.status);
+                console.log(e.responseText);
+            },
+            complete: function () {
+                //getdata()
+            }
+      })
+  });
 
-
+  /*
   var markers = [{
     icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png',
     position: [104.1324, 30.67761]
@@ -484,8 +527,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png',
     position: [104.105467, 30.607761]
   }];
-
+*/
   // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
+  /*
   markers.forEach(function(marker) {
     new AMap.Marker({
       map: map,
@@ -494,17 +538,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       offset: new AMap.Pixel(-13, -30)
     });
   });
-
+*/
   var center = map.getCenter();
-
-
-  // 添加事件监听, 使地图自适应显示到合适的范围
-  // AMap.event.addDomListener(document.getElementById('setFitView'), 'click', function() {
-  //   var newCenter = map.setFitView();
-  //   document.getElementById('centerCoord').innerHTML = '当前中心点坐标：' + newCenter.getCenter();
-  //   document.getElementById('tips').innerHTML = '通过setFitView，地图自适应显示到合适的范围内,点标记已全部显示在视野中！';
-  // });
-
 
   let district = null;
   let polygons=[];

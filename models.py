@@ -51,6 +51,17 @@ class WarningInfo(db.Model):
     occur_time = db.Column(db.String)
 
     def __repr__(self):
-        return '<WarningInfo>' % (self.event, self.name)
+        return '<WarningInfo>'
+
+
+class APPUser(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(50))
+    lock_id = db.Column(db.Integer)
+    lng = db.Column(db.Float)
+    lat = db.Column(db.Float)
+
+    def __repr__(self):
+        return '<APPUser>'
 
 

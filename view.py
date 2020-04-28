@@ -81,6 +81,18 @@ def heatpoint():
         return redirect(url_for('login'))
 
 
+@app.route('/HeatMap_chengdu/HeatPointMap/data', methods=['POST'])
+def heatpoint_data():
+    pointdist = {"point": []}
+    points = CityHeatMap.query.all()
+    for point in points:
+        pointdist["point"].append(json.dumps({
+            "position":[point.lng - 12.4, point.lat - 9.3]
+        }))
+    point_jsondata = json.dumps(pointdist)
+    return jsonify(point_jsondata)
+
+
 @app.route('/HeatMap_chengdu/Advise')
 def advise():
     if session.get('user_name'):
@@ -347,27 +359,47 @@ def pidu():
         return redirect(url_for('login'))
 
 
-@app.route('/app/login',methods=['GET','POST'])
-def app_login():
-    # a = request.args.get('xxx')
-    # b = request.form['xxx']
-
-    return jsonify({
-        "isTrue":True
-    })
+# @app.route('/app/getwarning',methods=['POST'])
+# def app_login():
+#     lock_id = request.form['lock_id']
+#     time = request.form['time']
+#
+#     return jsonify({
+#         "isTrue":True
+#     })
 
 
 @app.route('/app/WarningInfo',methods=['GET','POST'])
 def app_WarningInfo():
-    queryInfo = WarningInfo.query.all()
-    column_list = []
-    for item in queryInfo:
-        column_dict = {}
-        column_dict['name'] = item.name
-        column_dict['event'] = item.event
-        column_dict['occur_time'] = item.occur_time
-        column_list.append(column_dict)
-    return jsonify({"returnInfo": column_list})
+    if request.method == 'GET':
+        queryInfo = WarningInfo.query.all()
+        column_list = []
+        for item in queryInfo:
+            column_dict = {}
+            column_dict['name'] = item.name
+            column_dict['event'] = item.event
+            column_dict['occur_time'] = item.occur_time
+            column_list.append(column_dict)
+        return jsonify({"returnInfo": column_list})
+    else:
+        newWarning = WarningInfo(name=request.form['name'],
+                                 event=request.form['event'],
+                                 occur_time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"))
+        db.session.add(newWarning)
+        appuser = APPUser.query.filter(APPUser.username == request.form['app_username'],APPUser.lock_id == int(request.form['lock_id'])).first()
+        newAttackLog = AttackLog(lock_id=int(request.form['lock_id']),
+                                 attack_time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"),
+                                 lng=appuser.lng,
+                                 lat=appuser.lat,
+                                 isSafe=request.form['isSafe'] == 'True')
+        db.session.add(newAttackLog)
+        newCityHeatMap = CityHeatMap(lng=appuser.lng,
+                                     lat=appuser.lat,
+                                     count=50,
+                                     time=datetime.datetime.strptime(request.form['occur_time'], "%Y-%m-%d"))
+        db.session.add(newCityHeatMap)
+        db.session.commit()
+        db.session.close()
 
 
 if __name__ == '__main__':
