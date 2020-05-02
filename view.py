@@ -423,4 +423,4 @@ if __name__ == '__main__':
     # db.session.add(a2)
     # db.session.add(a1)
     # db.session.commit()
-    app.run()
+    app.run(host='0.0.0.0')
