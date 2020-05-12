@@ -87,7 +87,7 @@ def heatpoint_data():
     points = CityHeatMap.query.all()
     for point in points:
         pointdist["point"].append(json.dumps({
-            "position":[point.lng - 12.4, point.lat - 9.3]
+            "position": [point.lng - 12.4, point.lat - 9.3]
         }))
     point_jsondata = json.dumps(pointdist)
     return jsonify(point_jsondata)
@@ -369,7 +369,7 @@ def pidu():
 #     })
 
 
-@app.route('/app/WarningInfo',methods=['GET','POST'])
+@app.route('/app/WarningInfo', methods=['GET', 'POST'])
 def app_WarningInfo():
     if request.method == 'GET':
         queryInfo = WarningInfo.query.all()
@@ -382,11 +382,21 @@ def app_WarningInfo():
             column_list.append(column_dict)
         return jsonify({"returnInfo": column_list})
     else:
-        newWarning = WarningInfo(name=request.form['name'],
-                                 event=request.form['event'],
+        if request.form['name'] == 'Stranger':
+            name = '陌生人'
+        else:
+            name = '用户'
+        if request.form['event'] == 'attack':
+            event = '攻击'
+        elif request.form['event'] == 'warning':
+            event = '警告'
+        else:
+            event = '安全'
+        newWarning = WarningInfo(name=name,
+                                 event=event,
                                  occur_time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"))
         db.session.add(newWarning)
-        if request.form['event'] == '攻击':
+        if request.form['event'] == 'attack':
             appuser = APPUser.query.filter(APPUser.username == request.form['app_username'],
                                            APPUser.lock_id == int(request.form['lock_id'])).first()
             newAttackLog = AttackLog(lock_id=int(request.form['lock_id']),
@@ -423,4 +433,4 @@ if __name__ == '__main__':
     # db.session.add(a2)
     # db.session.add(a1)
     # db.session.commit()
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0", port=5000)

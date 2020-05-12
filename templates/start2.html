@@ -480,7 +480,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 markers.forEach(function(marker) {
                 new AMap.Marker({
                   map: map,
-                  icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png',
+                  icon: "{{ url_for('static',filename='dist/img/poi-marker-red2.png') }}",
                   position: [marker.position[0], marker.position[1]],
                   offset: new AMap.Pixel(-13, -30)
                 });
