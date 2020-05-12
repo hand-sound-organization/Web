@@ -359,14 +359,30 @@ def pidu():
         return redirect(url_for('login'))
 
 
-# @app.route('/app/getwarning',methods=['POST'])
-# def app_login():
-#     lock_id = request.form['lock_id']
-#     time = request.form['time']
-#
-#     return jsonify({
-#         "isTrue":True
-#     })
+@app.route('/app/login', methods=['GET'])
+def app_login():
+    username = request.args.get('username')
+    appuser = None
+    lock_id = None
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    if len(appuserlist) != 0:
+        appuser = appuserlist[0]
+        lock_id = appuser.lock_id
+
+    UserIsTrue = False
+
+    LockIsTrue = False
+    if appuser:
+        UserIsTrue = True
+
+    if lock_id:
+        LockIsTrue = True
+
+    return jsonify({
+        "LockIsTrue": LockIsTrue,
+        "UserIsTrue": UserIsTrue,
+
+    })
 
 
 @app.route('/app/WarningInfo', methods=['GET', 'POST'])
