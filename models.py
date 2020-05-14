@@ -49,6 +49,7 @@ class WarningInfo(db.Model):
     event = db.Column(db.String)
     name = db.Column(db.String)
     occur_time = db.Column(db.String)
+    username = db.Column(db.String(50))
 
     def __repr__(self):
         return '<WarningInfo>'
@@ -60,6 +61,18 @@ class APPUser(db.Model):
     lock_id = db.Column(db.Integer)
     lng = db.Column(db.Float)
     lat = db.Column(db.Float)
+    memberlist = db.Column(db.String,default='')
+    safeday = db.Column(db.Integer,default=0)
+    safetimes = db.Column(db.Integer,default=0)
+    member = db.Column(db.Integer,default=0)
+    safepct = db.Column(db.String,default='100%')
+    timestart = db.Column(db.String,default='')
+    timeend = db.Column(db.String,default='')
+    datalist = db.Column(db.String,default='')
+
+
+
+
 
     def __repr__(self):
         return '<APPUser>'

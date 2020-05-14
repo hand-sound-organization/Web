@@ -1,3 +1,5 @@
+from time import sleep
+
 from app import app, db
 from flask import render_template, request, jsonify, redirect, url_for, session, flash
 from models import *
@@ -359,26 +361,167 @@ def pidu():
         return redirect(url_for('login'))
 
 
-# @app.route('/app/getwarning',methods=['POST'])
-# def app_login():
-#     lock_id = request.form['lock_id']
-#     time = request.form['time']
-#
-#     return jsonify({
-#         "isTrue":True
-#     })
+@app.route('/app/login', methods=['GET'])
+def app_login():
+    username = request.args.get('username')
+    appuser = None
+    lock_id = None
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    if len(appuserlist) != 0:
+        appuser = appuserlist[0]
+        lock_id = appuser.lock_id
+
+    UserIsTrue = False
+
+    LockIsTrue = False
+    if appuser:
+        UserIsTrue = True
+
+    if lock_id :
+        LockIsTrue = True
+
+    return jsonify({
+        "LockIsTrue": LockIsTrue,
+        "UserIsTrue": UserIsTrue,
+
+    })
 
 
+@app.route('/app/signup', methods=['GET'])
+def app_signup():
+
+    username = request.args.get('username')
+    appuser = APPUser(username=username, lock_id=None, lng=116.591031 - 12.4, lat=39.540089 - 9.3)
+    db.session.add(appuser)
+    db.session.commit()
+    return jsonify({
+        "IsTrue": True,
+
+    })
+
+
+@app.route('/app/locksignup', methods=['GET'])
+def app_locksignup():
+
+    username = request.args.get('username')
+    lockid = request.args.get('lock_id')
+
+    user= APPUser.query.filter(APPUser.username == username).all()
+    if len(user) != 0:
+        user[0].lock_id=lockid
+    db.session.commit()
+    return jsonify({
+        "IsTrue": True,
+
+    })
+
+@app.route('/app/profile', methods=['GET'])
+def app_profile():
+    sleep(0.5)
+
+    username = request.args.get('username')
+
+    user = APPUser.query.filter(APPUser.username == username).all()
+
+    if len(user) != 0:
+        safeday = user[0].safeday
+        safetimes = user[0].safetimes
+        member = user[0].member
+        safepct = user[0].safepct
+        lock_id = user[0].lock_id
+
+
+    return jsonify({
+        "safeday"  : safeday,
+        "safetimes": safetimes,
+        "member"   : member,
+        "safepct"  : safepct,
+        "lock_id": lock_id,
+
+    })
+
+@app.route('/app/usermanagement', methods=['GET'])
+def app_usermanagement():
+    sleep(0.1)
+    username = request.args.get('username')
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    if len(appuserlist) != 0:
+        memberlist = appuserlist[0].memberlist
+
+
+    return jsonify({
+        "memberlist": memberlist,
+
+    })
+
+@app.route('/app/updatamemberlist', methods=['GET'])
+def app_updatamemberlist():
+    username = request.args.get('username')
+    memberlist = request.args.get('memberlist')
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    # print(appuserlist[0].memberlist)
+    if len(appuserlist) != 0:
+        appuserlist[0].memberlist = memberlist
+
+    db.session.commit()
+    return jsonify({
+        "IsTrue": True,
+
+    })
+
+@app.route('/app/getchain', methods=['GET'])
+def app_getchain():
+    sleep(0.5)
+    username = request.args.get('username')
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    # print(appuserlist[0].memberlist)
+    if len(appuserlist) != 0:
+        timestart = appuserlist[0].timestart
+        timeend = appuserlist[0].timeend
+        datalist = appuserlist[0].datalist
+
+    return jsonify({
+        "timestart": timestart,
+        "timeend":   timeend,
+        "datalist":  datalist,
+
+
+    })
+@app.route('/app/updatachain', methods=['GET'])
+def app_updatachain():
+    username = request.args.get('username')
+    timestart = request.args.get('timestart')
+    timeend = request.args.get('timeend')
+    datalist =request.args.get('datalist')
+
+
+    appuserlist = APPUser.query.filter(APPUser.username == username).all()
+    if len(appuserlist) != 0:
+         appuserlist[0].timestart = timestart
+         appuserlist[0].timeend =  timeend
+         appuserlist[0].datalist = datalist
+
+    return jsonify({
+        "IsTrue": True,
+
+
+
+    })
 @app.route('/app/WarningInfo', methods=['GET', 'POST'])
 def app_WarningInfo():
+
     if request.method == 'GET':
-        queryInfo = WarningInfo.query.all()
+        username = request.args.get('username')
+        print(username)
+        queryInfo = WarningInfo.query.filter(WarningInfo.username == username).all()
         column_list = []
         for item in queryInfo:
             column_dict = {}
             column_dict['name'] = item.name
             column_dict['event'] = item.event
             column_dict['occur_time'] = item.occur_time
+            column_dict['username'] = item.username
+            print(column_dict)
             column_list.append(column_dict)
         return jsonify({"returnInfo": column_list})
     else:
@@ -392,9 +535,12 @@ def app_WarningInfo():
             event = '警告'
         else:
             event = '安全'
+        username = request.form['app_username']
+        print(username)
         newWarning = WarningInfo(name=name,
                                  event=event,
-                                 occur_time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"))
+                                 occur_time=datetime.strptime(request.form['occur_time'], "%Y-%m-%d %H:%M:%S"),
+                                 username=username)
         db.session.add(newWarning)
         if request.form['event'] == 'attack':
             appuser = APPUser.query.filter(APPUser.username == request.form['app_username'],
@@ -416,7 +562,7 @@ def app_WarningInfo():
 
 
 if __name__ == '__main__':
-    # appuser = APPUser(username='lsd',lock_id=2020,lng=116.591031 - 12.4,lat=39.540089 - 9.3)
+    # appuser = APPUser(username='jrk',lock_id=None,lng=116.591031 - 12.4,lat=39.540089 - 9.3)
     # db.session.add(appuser)
     # db.session.commit()
     # a1 = WarningInfo.query.get(1)
