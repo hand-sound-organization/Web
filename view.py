@@ -377,7 +377,7 @@ def app_login():
     if appuser:
         UserIsTrue = True
 
-    if lock_id :
+    if lock_id:
         LockIsTrue = True
 
     return jsonify({
@@ -385,50 +385,6 @@ def app_login():
         "UserIsTrue": UserIsTrue,
 
     })
-
-
-@app.route('/app/signup', methods=['GET'])
-def app_signup():
-
-    username = request.args.get('username')
-    appuser = APPUser(username=username, lock_id=None, lng=116.591031 - 12.4, lat=39.540089 - 9.3)
-    db.session.add(appuser)
-    db.session.commit()
-    return jsonify({
-        "IsTrue": True,
-
-    })
-
-
-@app.route('/app/locksignup', methods=['GET'])
-def app_locksignup():
-
-    username = request.args.get('username')
-    lockid = request.args.get('lock_id')
-
-    user= APPUser.query.filter(APPUser.username == username).all()
-    if len(user) != 0:
-        user[0].lock_id=lockid
-    db.session.commit()
-    return jsonify({
-        "IsTrue": True,
-
-    })
-
-@app.route('/app/profile', methods=['GET'])
-def app_profile():
-    sleep(0.5)
-
-    username = request.args.get('username')
-
-    user = APPUser.query.filter(APPUser.username == username).all()
-
-    if len(user) != 0:
-        safeday = user[0].safeday
-        safetimes = user[0].safetimes
-        member = user[0].member
-        safepct = user[0].safepct
-        lock_id = user[0].lock_id
 
 
     return jsonify({
