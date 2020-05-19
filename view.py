@@ -21,8 +21,8 @@ def judgement():
     username = request.form['username']
     password = request.form['password']
     user = User.query.filter(User.username == username, User.password == password).all()
-    if username == 'luosida':
-        username = '罗嗣达'
+    if username == '掌音测试1':
+        username = '掌音测试1'
     elif username == 'jiangrenkai':
         username = '姜人楷'
     elif username == 'xiangguangyu':

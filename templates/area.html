@@ -289,7 +289,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">安全事故时间变化图-1</h3>
+                <h3 class="card-title">安全事故时间变化图</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -305,23 +305,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.card-body -->
             </div>
 
-            <!-- DONUT CHART -->
-            <div class="card card-danger">
-              <div class="card-header">
-                <h3 class="card-title">安全事故种类图-1</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
 
 
 
@@ -333,7 +317,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h5 class="m-0">{{ area }}安全热力预测图</h5>
+                <h5 class="m-0">{{ area }}攻击热力预测图</h5>
               </div>
               <div class="card-body">
                 <div  style="width:100%;height: 600px;z-index: 1000000;">
@@ -342,30 +326,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
 
-            <!-- LINE CHART -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">安全事故时间变化图-2</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- PIE CHART -->
+            <!-- DONUT CHART -->
             <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">安全事故种类图-2</h3>
+                <h3 class="card-title">安全事故种类图</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -374,7 +338,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
               </div>
               <div class="card-body">
-                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
               <!-- /.card-body -->
             </div>
@@ -594,8 +558,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   let i = 0;
   function heatmapShow(heatmap){
     for(let j=0;j<heatmapDataright.length;j++){
-      heatmapDataright[j]["lng"]+=0.00001;
-      heatmapDataright[j]["lat"]+=0.00001;
+      heatmapDataright[j]["lng"]+=0.001*(Math.random()*2 - 1);
+      heatmapDataright[j]["lat"]+=0.001*(Math.random()*2 - 1);
     }
     heatmap.setDataSet({
       data:heatmapDataright,
@@ -604,10 +568,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     heatmap.show();
     i++;
     if(i!==10){
-      setTimeout(function (){heatmapShow(heatmap)},100);
+      setTimeout(function (){heatmapShow(heatmap)},500);
     }else{
       i = 0;
-      setTimeout(function (){heatmapShow(heatmap)},100);
+      setTimeout(function (){heatmapShow(heatmap)},500);
     }
   }
 
@@ -745,18 +709,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     //-------------
     //- LINE CHART -
     //--------------
-    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-    var lineChartData = jQuery.extend(true, {}, areaChartData)
-    lineChartData.datasets[0].fill = false;
-    lineChartData.datasets[1].fill = false;
-    lineChartOptions.datasetFill = false
 
-    var lineChart = new Chart(lineChartCanvas, {
-      type: 'line',
-      data: lineChartData,
-      options: lineChartOptions
-    })
 
     //-------------
     //- DONUT CHART -
@@ -793,19 +746,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     //- PIE CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    var pieChart = new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions
-    })
+
 
     //-------------
     //- BAR CHART -
