@@ -424,17 +424,25 @@ def app_profile():
     if len(user) != 0:
         safeday = user[0].safeday
         safetimes = user[0].safetimes
-        member = user[0].member
+        # member = user[0].member
         safepct = user[0].safepct
         lock_id = user[0].lock_id
+        memberlsit = user[0].memberlist
+        print(memberlsit)
+        if(memberlsit != ""):
+            list = memberlsit.split(",")
+            print(len(list))
+            listlen = len(list)
+        else:
+            listlen = 0
+
 
     return jsonify({
         "safeday"  : safeday,
         "safetimes": safetimes,
-        "member"   : member,
         "safepct"  : safepct,
         "lock_id": lock_id,
-
+        "member" : listlen,
     })
 
 @app.route('/app/usermanagement', methods=['GET'])
