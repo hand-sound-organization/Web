@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b5bf356-a5c3-4a8a-a926-6759cdc16536" name="Default Changelist" comment="改了中文翻译">
-      <change afterPath="$PROJECT_DIR$/PredNetConvGRU/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PredNetConvGRU/Decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/PredNetConvGRU/Decoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PredNetConvGRU/PredNetModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/PredNetConvGRU/PredNetModel.py" afterDir="false" />
-    </list>
+    <list default="true" id="1b5bf356-a5c3-4a8a-a926-6759cdc16536" name="Default Changelist" comment="提交版" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -244,7 +239,7 @@
       <workItem from="1589816818110" duration="3866000" />
       <workItem from="1589863309988" duration="2583000" />
       <workItem from="1589856550023" duration="768000" />
-      <workItem from="1590980865522" duration="652000" />
+      <workItem from="1590980865522" duration="931000" />
     </task>
     <task id="LOCAL-00001" summary="添加了用户登录模块，用户名为名字拼音全拼，密码为全拼+123">
       <created>1587179389924</created>
@@ -379,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589271747050</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="提交版">
+      <created>1590981789470</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1590981789470</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +402,8 @@
     <MESSAGE value="改了攻击" />
     <MESSAGE value="改了安全" />
     <MESSAGE value="改了中文翻译" />
-    <option name="LAST_COMMIT_MESSAGE" value="改了中文翻译" />
+    <MESSAGE value="提交版" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交版" />
   </component>
   <component name="WindowStateProjectService">
     <state x="497" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587112676394">
